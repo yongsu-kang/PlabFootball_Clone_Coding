@@ -1,5 +1,7 @@
 package com.yong.PlabFootball.user.entity;
 
+import com.yong.PlabFootball.user.entity.vo.Email;
+import com.yong.PlabFootball.user.entity.vo.Password;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +16,8 @@ class UserTest {
     void userCreateTest() {
         //given
         String username = "kang";
-        String email = "kang@test.com";
-        String password = "aaa1234!!";
+        Email email = new Email("kang@test.com");
+        Password password = new Password("aaa1234!!");
 
         //when
         User user = new User(username, email, password);
@@ -23,8 +25,8 @@ class UserTest {
         //then
         assertAll(
                 () -> assertThat(user.getUsername(), is(username)),
-                () -> assertThat(user.getEmail(), is(email)),
-                () -> assertThat(user.getPassword(), is(password))
+                () -> assertThat(user.getEmail(), is(email.getEmail())),
+                () -> assertThat(user.getPassword(), is(password.getPassword()))
         );
     }
 
@@ -33,14 +35,14 @@ class UserTest {
     void blankTest() {
         //given
         String username = "kang";
-        String email = "kang@test.com";
-        String password = "aaa1234!!";
+        Email email = new Email("kang@test.com");
+        Password password = new Password("aaa1234!!");
 
         //when,then
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, "", password)),
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, new Email(""), password)),
                 () -> assertThrows(IllegalArgumentException.class, () -> new User("", email, password)),
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, ""))
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, new Password("")))
         );
     }
 
@@ -49,33 +51,25 @@ class UserTest {
     void wrongEmailTest() {
         //given
         String username = "kang";
-        String wrong_email = "kang123";
-        String password = "aaa1234!!";
+        Password password = new Password("aaa1234!!");
 
         //when
         //then
-        assertThrows(IllegalArgumentException.class, () -> new User(username, wrong_email, password));
+        assertThrows(IllegalArgumentException.class, () -> new User(username, new Email("kang123"), password));
     }
 
     @Test
     @DisplayName("패스워드는 8자리 이상의 영어 숫자 특수기호를 포함해야한다.")
     void wrongPasswordTest() {
         String username = "kang";
-        String email = "kang@test.com";
-        String wrongPassword1 = "a1!";
-        String wrongPassword2 = "asdfertg";
-        String wrongPassword3 = "fjdask123";
-        String wrongPassword4 = "!@#@#@1312";
-        String wrongPassword5 = "djksal!@#!@$!";
+        Email email = new Email("kang@test.com");
 
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, wrongPassword1)),
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, wrongPassword2)),
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, wrongPassword3)),
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, wrongPassword4)),
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, wrongPassword5))
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, new Password("a1!"))),
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, new Password("asdfertg"))),
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, new Password("fjdask123"))),
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, new Password("!@#@#@1312"))),
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(username, email, new Password("djksal!@#!@$!")))
         );
-
-
     }
 }

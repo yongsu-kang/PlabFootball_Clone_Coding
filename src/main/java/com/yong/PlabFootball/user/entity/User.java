@@ -1,18 +1,18 @@
 package com.yong.PlabFootball.user.entity;
 
+import com.yong.PlabFootball.user.entity.vo.Email;
+import com.yong.PlabFootball.user.entity.vo.Password;
+
 import java.util.regex.Pattern;
 
 public class User {
     private long userId;
     private String username;
-    private final String email;
-    private String password;
+    private final Email email;
+    private Password password;
 
-    public User(String username, String email, String password) {
+    public User(String username, Email email, Password password) {
         validateUsername(username);
-        validateEmail(email);
-        validatePassword(password);
-
         this.username = username;
         this.email = email;
         this.password = password;
@@ -20,19 +20,6 @@ public class User {
 
     private void validateUsername(String username) {
         if (username.isBlank()) throw new IllegalArgumentException("this name is wrong");
-    }
-
-    private void validateEmail(String email) {
-        String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-        Pattern pattern = Pattern.compile(emailPattern);
-        if (email.isBlank() || !pattern.matcher(email).matches())
-            throw new IllegalArgumentException("this email is wrong");
-    }
-
-    private void validatePassword(String password) {
-        String passwordPattern = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$])(?=\\S+$).{8,}$";
-        Pattern pattern = Pattern.compile(passwordPattern);
-        if (password.isBlank() || password.length() < 8 || !pattern.matcher(password).matches()) throw new IllegalArgumentException("this password is wrong");
     }
 
     public long getUserId() {
@@ -44,14 +31,14 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return email.getEmail();
     }
 
     public String getPassword() {
-        return password;
+        return password.getPassword();
     }
 
     public void changePassword(String newPassword) {
-        this.password = newPassword;
+        this.password = password.changePassword(newPassword);
     }
 }
