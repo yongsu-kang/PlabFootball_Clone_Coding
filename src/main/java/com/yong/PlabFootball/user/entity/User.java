@@ -2,9 +2,9 @@ package com.yong.PlabFootball.user.entity;
 
 import com.yong.PlabFootball.user.entity.vo.Email;
 import com.yong.PlabFootball.user.entity.vo.Password;
+import lombok.Getter;
 
-import java.util.regex.Pattern;
-
+@Getter
 public class User {
     private long userId;
     private String username;
@@ -20,22 +20,6 @@ public class User {
 
     private void validateUsername(String username) {
         if (username.isBlank()) throw new IllegalArgumentException("this name is wrong");
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmail() {
-        return email.getEmail();
-    }
-
-    public String getPassword() {
-        return password.getPassword();
     }
 
     public void changePassword(String newPassword) {

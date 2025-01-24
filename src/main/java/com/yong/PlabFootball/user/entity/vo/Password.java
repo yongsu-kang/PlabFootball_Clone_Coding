@@ -1,7 +1,10 @@
 package com.yong.PlabFootball.user.entity.vo;
 
+import lombok.Getter;
+
 import java.util.regex.Pattern;
 
+@Getter
 public class Password {
 
     private final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$])(?=\\S+$).{8,}$";
@@ -14,11 +17,8 @@ public class Password {
     }
 
     private void validatePassword(String password) {
-        if (password.isBlank() || password.length() < 8 || !pattern.matcher(password).matches()) throw new IllegalArgumentException("this password is wrong");
-    }
-
-    public String getPassword() {
-        return password;
+        if (password.isBlank() || password.length() < 8 || !pattern.matcher(password).matches())
+            throw new IllegalArgumentException("this password is wrong");
     }
 
     public Password changePassword(String newPassword) {

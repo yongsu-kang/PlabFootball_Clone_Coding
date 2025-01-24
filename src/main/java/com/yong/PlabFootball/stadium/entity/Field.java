@@ -1,7 +1,9 @@
 package com.yong.PlabFootball.stadium.entity;
 
 import com.yong.PlabFootball.stadium.entity.vo.GrassCondition;
+import lombok.Getter;
 
+@Getter
 public class Field {
     private Long id;
     private String name;
@@ -19,33 +21,5 @@ public class Field {
         this.outdoor = outdoor;
         this.grassCondition = grassCondition;
         this.amountPerHour = amountPerHour;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public boolean isOutdoor() {
-        return outdoor;
-    }
-
-    public GrassCondition getGrassCondition() {
-        return grassCondition;
-    }
-
-    public int getAmountPerHour() {
-        return amountPerHour;
     }
 }

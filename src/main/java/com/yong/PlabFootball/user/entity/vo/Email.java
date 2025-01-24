@@ -1,7 +1,10 @@
 package com.yong.PlabFootball.user.entity.vo;
 
+import lombok.Getter;
+
 import java.util.regex.Pattern;
 
+@Getter
 public class Email {
 
     private final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -18,9 +21,5 @@ public class Email {
         Pattern pattern = Pattern.compile(emailPattern);
         if (email.isBlank() || !pattern.matcher(email).matches())
             throw new IllegalArgumentException("this email is wrong");
-    }
-
-    public String getEmail() {
-        return email;
     }
 }

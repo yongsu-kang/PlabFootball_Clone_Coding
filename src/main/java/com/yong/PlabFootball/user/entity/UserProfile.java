@@ -3,7 +3,9 @@ package com.yong.PlabFootball.user.entity;
 import com.yong.PlabFootball.user.entity.vo.Ability;
 import com.yong.PlabFootball.user.entity.vo.FavoriteStyle;
 import com.yong.PlabFootball.user.entity.vo.Gender;
+import lombok.Getter;
 
+@Getter
 public class UserProfile {
     private Long id;
     private String name;
