@@ -1,4 +1,4 @@
-package com.yong.PlabFootball.user.entity.vo;
+package com.yong.PlabFootball.member.entity.vo;
 
 public enum Ability {
     SHOOT,

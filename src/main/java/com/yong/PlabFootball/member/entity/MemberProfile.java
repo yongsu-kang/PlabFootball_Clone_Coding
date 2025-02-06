@@ -1,21 +1,41 @@
-package com.yong.PlabFootball.user.entity;
+package com.yong.PlabFootball.member.entity;
 
-import com.yong.PlabFootball.user.entity.vo.Ability;
-import com.yong.PlabFootball.user.entity.vo.FavoriteStyle;
-import com.yong.PlabFootball.user.entity.vo.Gender;
+import com.yong.PlabFootball.member.entity.vo.Ability;
+import com.yong.PlabFootball.member.entity.vo.FavoriteStyle;
+import com.yong.PlabFootball.member.entity.vo.Gender;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-public class UserProfile {
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class MemberProfile {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String playerName;
+
+    @Column
     private String description;
+
+    @Enumerated(value = EnumType.STRING)
     private Gender gender;
+
+    @Enumerated(value = EnumType.STRING)
     private FavoriteStyle favoriteStyle;
+
+    @Enumerated(value = EnumType.STRING)
     private Ability ability;
 
-    public UserProfile(Long id, String name, String playerName, String description, Gender gender, FavoriteStyle favoriteStyle, Ability ability) {
+    public MemberProfile(Long id, String name, String playerName, String description, Gender gender, FavoriteStyle favoriteStyle, Ability ability) {
         this.id = id;
         this.name = name;
         this.playerName = playerName;
