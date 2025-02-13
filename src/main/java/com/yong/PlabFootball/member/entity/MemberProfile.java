@@ -1,5 +1,6 @@
 package com.yong.PlabFootball.member.entity;
 
+import com.yong.PlabFootball.common.vo.BaseEntity;
 import com.yong.PlabFootball.member.entity.vo.Ability;
 import com.yong.PlabFootball.member.entity.vo.FavoriteStyle;
 import com.yong.PlabFootball.member.entity.vo.Gender;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberProfile {
+public class MemberProfile extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

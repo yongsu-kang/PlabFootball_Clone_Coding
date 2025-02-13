@@ -1,5 +1,6 @@
 package com.yong.PlabFootball.stadium.entity;
 
+import com.yong.PlabFootball.common.vo.BaseEntity;
 import com.yong.PlabFootball.stadium.entity.vo.Region;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Stadium {
+public class Stadium extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

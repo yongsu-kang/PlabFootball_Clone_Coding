@@ -1,5 +1,6 @@
 package com.yong.PlabFootball.stadium.entity;
 
+import com.yong.PlabFootball.common.vo.BaseEntity;
 import com.yong.PlabFootball.stadium.entity.vo.GrassCondition;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Field {
+public class Field extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -50,7 +51,7 @@ public class Field {
     }
 
     public void setStadium(Stadium stadium) {
-        if (Objects.nonNull(this.stadium)){
+        if (Objects.nonNull(this.stadium)) {
             stadium.getFields().remove(this);
         }
         this.stadium = stadium;
