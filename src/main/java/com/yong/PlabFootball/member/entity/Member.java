@@ -3,8 +3,7 @@ package com.yong.PlabFootball.member.entity;
 import com.yong.PlabFootball.common.vo.BaseEntity;
 import com.yong.PlabFootball.member.entity.vo.Email;
 import com.yong.PlabFootball.member.entity.vo.Password;
-import com.yong.PlabFootball.reservation.Reservation;
-import com.yong.PlabFootball.stadium.entity.Stadium;
+import com.yong.PlabFootball.reservation.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -39,8 +38,9 @@ public class Member extends BaseEntity {
     private List<Reservation> reservations = new ArrayList<>();
 
     @Builder
-    public Member(String name, Email email, Password password) {
+    public Member(Long id, String name, Email email, Password password) {
         validateName(name);
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;

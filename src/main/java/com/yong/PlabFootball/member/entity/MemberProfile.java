@@ -6,6 +6,7 @@ import com.yong.PlabFootball.member.entity.vo.FavoriteStyle;
 import com.yong.PlabFootball.member.entity.vo.Gender;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,6 +37,7 @@ public class MemberProfile extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Ability ability;
 
+    @Builder
     public MemberProfile(Long id, String name, String playerName, String description, Gender gender, FavoriteStyle favoriteStyle, Ability ability) {
         this.id = id;
         this.name = name;
