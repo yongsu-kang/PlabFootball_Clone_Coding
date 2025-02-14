@@ -1,28 +1,54 @@
 package com.yong.PlabFootball.member.service;
 
+import com.yong.PlabFootball.common.converter.MemberConverter;
+import com.yong.PlabFootball.member.dto.MemberDto;
 import com.yong.PlabFootball.member.entity.Member;
 import com.yong.PlabFootball.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    @Transactional
+    public MemberDto createMember(MemberDto memberDto) {
+        return MemberConverter.toMemberDto(
+                memberRepository.save(
+                        MemberConverter.toMemberEntity(memberDto))
+        );
     }
 
-    public Member createUser(Member Member) {
-        return memberRepository.save(Member);
+    public MemberDto findById(MemberDto memberDto) {
+        return MemberConverter.toMemberDto(
+                memberRepository.findById(memberDto.getId())
+                        .orElseThrow(() -> new IllegalArgumentException("wrong id"))
+        );
     }
 
-    public Member findById(Member Member) {
-        return memberRepository.findById(Member.getId())
-                .orElseThrow(() -> new IllegalArgumentException("wrong id"));
+    public MemberDto findByEmail(MemberDto memberDto) {
+        return MemberConverter.toMemberDto(
+                memberRepository.findByEmail(memberDto.getEmail())
+                        .orElseThrow(() -> new IllegalArgumentException("wrong email"))
+        );
     }
 
-    public Member findByEmail(Member Member) {
-        return memberRepository.findByEmail(Member.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("wrong email"));
+    public List<MemberDto> findAllMember() {
+        return memberRepository.findAll()
+                .stream()
+                .map(MemberConverter::toMemberDto)
+                .toList();
+    }
+
+    @Transactional
+    public MemberDto changePassword(MemberDto memberDto) {
+        Member member = memberRepository.findById(memberDto.getId()).get();
+        member.changePassword(memberDto.getPassword());
+        return MemberConverter.toMemberDto(member);
     }
 }

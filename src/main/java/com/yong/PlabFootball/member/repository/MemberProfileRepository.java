@@ -1,17 +1,10 @@
 package com.yong.PlabFootball.member.repository;
 
 import com.yong.PlabFootball.member.entity.MemberProfile;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface MemberProfileRepository {
-    MemberProfile insert(MemberProfile memberProfile);
-
-    Optional<MemberProfile> findById(long userProfileId);
-
-    Optional<MemberProfile> findByMemberId(long memberId);
-
-    MemberProfile update(MemberProfile memberProfile);
-
-    void deleteById(Long userProfileId);
+public interface MemberProfileRepository extends JpaRepository<MemberProfile, Long> {
+    Optional<MemberProfile> findByMemberId(Long memberId);
 }
