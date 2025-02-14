@@ -4,6 +4,7 @@ import com.yong.PlabFootball.common.vo.BaseEntity;
 import com.yong.PlabFootball.stadium.entity.vo.GrassCondition;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -40,8 +41,9 @@ public class Field extends BaseEntity {
     @ManyToOne
     private Stadium stadium;
 
-    public Field(Long fieldId, String name, int width, int length, boolean outdoor, GrassCondition grassCondition, int amountPerHour) {
-        this.id = fieldId;
+    @Builder
+    public Field(Long id, String name, int width, int length, boolean outdoor, GrassCondition grassCondition, int amountPerHour) {
+        this.id = id;
         this.name = name;
         this.width = width;
         this.length = length;
