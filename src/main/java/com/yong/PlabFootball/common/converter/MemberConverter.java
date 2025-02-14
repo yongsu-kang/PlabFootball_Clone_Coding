@@ -12,6 +12,7 @@ public class MemberConverter {
     public static MemberDto toMemberDto(Member member) {
         return MemberDto.builder()
                 .id(member.getId())
+                .name(member.getName())
                 .email(member.getEmail())
                 .password(member.getPassword())
                 .build();

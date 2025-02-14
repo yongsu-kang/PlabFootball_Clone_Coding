@@ -33,7 +33,7 @@ public class MemberService {
 
     public MemberDto findByEmail(MemberDto memberDto) {
         return MemberConverter.toMemberDto(
-                memberRepository.findByEmail(memberDto.getEmail())
+                memberRepository.searchByEmail(memberDto.getEmail())
                         .orElseThrow(() -> new IllegalArgumentException("wrong email"))
         );
     }
@@ -47,8 +47,14 @@ public class MemberService {
 
     @Transactional
     public MemberDto changePassword(MemberDto memberDto) {
-        Member member = memberRepository.findById(memberDto.getId()).get();
+        Member member = memberRepository.findById(memberDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("wrong id"));
         member.changePassword(memberDto.getPassword());
         return MemberConverter.toMemberDto(member);
+    }
+
+    @Transactional
+    public void deleteById(MemberDto memberDto) {
+        memberRepository.deleteById(memberDto.getId());
     }
 }
