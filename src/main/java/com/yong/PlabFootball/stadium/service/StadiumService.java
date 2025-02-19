@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.stadium.service;
 
-import com.yong.PlabFootball.common.converter.StadiumConverter;
+import com.yong.PlabFootball.global.converter.StadiumConverter;
 import com.yong.PlabFootball.stadium.dto.StadiumDto;
 import com.yong.PlabFootball.stadium.entity.Stadium;
 import com.yong.PlabFootball.stadium.repository.StadiumRepository;
@@ -22,12 +22,12 @@ public class StadiumService {
         return StadiumConverter.toStadiumDto(stadiumRepository.save(stadium));
     }
 
-    public StadiumDto findById(StadiumDto stadiumDto) {
+    public StadiumDto searchStadiumById(StadiumDto stadiumDto) {
         return StadiumConverter.toStadiumDto(stadiumRepository.findById(stadiumDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("wrong stadium id")));
     }
 
-    public List<StadiumDto> findAll() {
+    public List<StadiumDto> searchAllStadium() {
         return stadiumRepository.findAll()
                 .stream()
                 .map(StadiumConverter::toStadiumDto)
@@ -48,5 +48,10 @@ public class StadiumService {
         stadium.changeRegion(stadiumDto.getRegion());
 
         return StadiumConverter.toStadiumDto(stadium);
+    }
+
+    @Transactional
+    public void deleteStadiumById(StadiumDto stadiumDto) {
+        stadiumRepository.deleteById(stadiumDto.getId());
     }
 }

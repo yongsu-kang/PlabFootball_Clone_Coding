@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.stadium.service;
 
-import com.yong.PlabFootball.common.converter.StadiumConverter;
+import com.yong.PlabFootball.global.converter.StadiumConverter;
 import com.yong.PlabFootball.stadium.dto.FieldDto;
 import com.yong.PlabFootball.stadium.dto.StadiumDto;
 import com.yong.PlabFootball.stadium.entity.Field;
@@ -23,12 +23,12 @@ public class FieldService {
         return StadiumConverter.toFieldDto(fieldRepository.save(field));
     }
 
-    public FieldDto findById(FieldDto fieldDto) {
+    public FieldDto searchFieldById(FieldDto fieldDto) {
         return StadiumConverter.toFieldDto(fieldRepository.findById(fieldDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("wrong field Id")));
     }
 
-    public List<FieldDto> findAllByStadiumId(StadiumDto stadiumDto) {
+    public List<FieldDto> searchAllField(StadiumDto stadiumDto) {
         return fieldRepository.findAllByStadiumId(stadiumDto.getId())
                 .stream().map(StadiumConverter::toFieldDto)
                 .toList();
