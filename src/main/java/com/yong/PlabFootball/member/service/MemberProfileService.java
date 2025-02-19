@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.member.service;
 
-import com.yong.PlabFootball.common.converter.MemberConverter;
+import com.yong.PlabFootball.global.converter.MemberConverter;
 import com.yong.PlabFootball.member.dto.MemberProfileDto;
 import com.yong.PlabFootball.member.entity.MemberProfile;
 import com.yong.PlabFootball.member.repository.MemberProfileRepository;

@@ -1,4 +1,4 @@
-package com.yong.PlabFootball.common.converter;
+package com.yong.PlabFootball.global.converter;
 
 import com.yong.PlabFootball.member.dto.MemberDto;
 import com.yong.PlabFootball.member.dto.MemberProfileDto;

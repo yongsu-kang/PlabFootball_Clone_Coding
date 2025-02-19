@@ -1,4 +1,4 @@
-package com.yong.PlabFootball.common.vo;
+package com.yong.PlabFootball.global.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

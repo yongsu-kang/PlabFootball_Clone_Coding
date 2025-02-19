@@ -1,4 +1,4 @@
-package com.yong.PlabFootball.common.config;
+package com.yong.PlabFootball.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

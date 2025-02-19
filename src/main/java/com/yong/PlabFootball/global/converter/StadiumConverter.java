@@ -1,9 +1,11 @@
-package com.yong.PlabFootball.common.converter;
+package com.yong.PlabFootball.global.converter;
 
 import com.yong.PlabFootball.stadium.dto.FieldDto;
 import com.yong.PlabFootball.stadium.dto.StadiumDto;
 import com.yong.PlabFootball.stadium.entity.Field;
 import com.yong.PlabFootball.stadium.entity.Stadium;
+
+import java.util.List;
 
 public class StadiumConverter {
     public static Stadium toStadiumEntity(StadiumDto stadiumDto) {
@@ -30,9 +32,9 @@ public class StadiumConverter {
                 .vest(stadium.isVest())
                 .ball(stadium.isBall())
                 .region(stadium.getRegion())
+                .fields(getFieldDtoList(stadium))
                 .build();
     }
-
 
     public static Field toFieldEntity(FieldDto fieldDto) {
         Field field = Field.builder()
@@ -61,5 +63,9 @@ public class StadiumConverter {
                 .grassCondition(field.getGrassCondition())
                 .amountPerHour(field.getAmountPerHour())
                 .build();
+    }
+
+    private static List<FieldDto> getFieldDtoList(Stadium stadium) {
+        return stadium.getFields().stream().map(StadiumConverter::toFieldDto).toList();
     }
 }
