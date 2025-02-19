@@ -24,21 +24,21 @@ public class MemberService {
         );
     }
 
-    public MemberDto findById(MemberDto memberDto) {
+    public MemberDto searchMemberById(MemberDto memberDto) {
         return MemberConverter.toMemberDto(
                 memberRepository.findById(memberDto.getId())
                         .orElseThrow(() -> new IllegalArgumentException("wrong id"))
         );
     }
 
-    public MemberDto findByEmail(MemberDto memberDto) {
+    public MemberDto searchMemberByEmail(MemberDto memberDto) {
         return MemberConverter.toMemberDto(
                 memberRepository.searchByEmail(memberDto.getEmail())
                         .orElseThrow(() -> new IllegalArgumentException("wrong email"))
         );
     }
 
-    public List<MemberDto> findAllMember() {
+    public List<MemberDto> searchAllMember() {
         return memberRepository.findAll()
                 .stream()
                 .map(MemberConverter::toMemberDto)
@@ -46,7 +46,7 @@ public class MemberService {
     }
 
     @Transactional
-    public MemberDto changePassword(MemberDto memberDto) {
+    public MemberDto modifyMemberPassword(MemberDto memberDto) {
         Member member = memberRepository.findById(memberDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("wrong id"));
         member.changePassword(memberDto.getPassword());

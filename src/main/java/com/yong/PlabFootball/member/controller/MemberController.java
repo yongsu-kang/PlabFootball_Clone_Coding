@@ -25,17 +25,17 @@ public class MemberController {
     @GetMapping("/api/members/{member_id}")
     public MemberDto getMemberById(@PathVariable(value = "member_id") Long id) {
         MemberDto memberDto = MemberDto.builder().id(id).build();
-        return memberService.findById(memberDto);
+        return memberService.searchMemberById(memberDto);
     }
 
     @GetMapping("/api/members")
     public List<MemberDto> getMembers() {
-        return memberService.findAllMember();
+        return memberService.searchAllMember();
     }
 
     @PutMapping("/api/members")
     public MemberDto changePassword(MemberDto memberDto) {
-        return memberService.changePassword(memberDto);
+        return memberService.modifyMemberPassword(memberDto);
     }
 
     @DeleteMapping("/api/members")
@@ -51,7 +51,7 @@ public class MemberController {
 
     @GetMapping("/api/members/info")
     public MemberProfileDto getMemberProfileById(MemberProfileDto memberProfileDto) {
-        return memberProfileService.findById(memberProfileDto);
+        return memberProfileService.searchProfileById(memberProfileDto);
     }
 
     @PutMapping("/api/members/info")

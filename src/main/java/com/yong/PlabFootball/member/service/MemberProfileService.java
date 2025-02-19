@@ -19,7 +19,7 @@ public class MemberProfileService {
         return MemberConverter.toMemberProfileDto(memberProfileRepository.save(MemberConverter.toMemberProfileEntity(memberProfileDto)));
     }
 
-    public MemberProfileDto findById(MemberProfileDto memberProfileDto) {
+    public MemberProfileDto searchProfileById(MemberProfileDto memberProfileDto) {
         return MemberConverter.toMemberProfileDto(memberProfileRepository.findById(memberProfileDto.getId())
                 .orElseThrow(IllegalArgumentException::new));
     }
