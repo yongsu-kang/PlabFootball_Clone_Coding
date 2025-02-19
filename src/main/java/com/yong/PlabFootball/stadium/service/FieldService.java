@@ -5,7 +5,6 @@ import com.yong.PlabFootball.stadium.dto.FieldDto;
 import com.yong.PlabFootball.stadium.dto.StadiumDto;
 import com.yong.PlabFootball.stadium.entity.Field;
 import com.yong.PlabFootball.stadium.repository.FieldRepository;
-import com.yong.PlabFootball.stadium.repository.StadiumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
