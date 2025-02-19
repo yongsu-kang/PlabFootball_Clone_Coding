@@ -24,30 +24,18 @@ public class MemberProfileService {
                 .orElseThrow(IllegalArgumentException::new));
     }
 
+    
+
     @Transactional
     public MemberProfileDto modifyMemberProfile(MemberProfileDto memberProfileDto) {
         MemberProfile memberProfile = memberProfileRepository.findById(memberProfileDto.getId())
                 .orElseThrow(IllegalArgumentException::new);
 
-        if (!memberProfile.getDescription().equals(memberProfileDto.getDescription())) {
-            memberProfile.changeDescription(memberProfileDto.getDescription());
-        }
-
-        if (!memberProfile.getAbility().equals(memberProfileDto.getAbility())) {
-            memberProfile.changeAbility(memberProfileDto.getAbility());
-        }
-
-        if (!memberProfile.getGender().equals(memberProfileDto.getGender())) {
-            memberProfile.changeGender(memberProfileDto.getGender());
-        }
-
-        if (!memberProfile.getFavoriteStyle().equals(memberProfileDto.getFavoriteStyle())) {
-            memberProfile.changeFavoriteStyle(memberProfileDto.getFavoriteStyle());
-        }
-
-        if (!memberProfile.getPlayerName().equals(memberProfileDto.getPlayerName())) {
-            memberProfile.changePlayerName(memberProfileDto.getPlayerName());
-        }
+        memberProfile.changeDescription(memberProfileDto.getDescription());
+        memberProfile.changeAbility(memberProfileDto.getAbility());
+        memberProfile.changeGender(memberProfileDto.getGender());
+        memberProfile.changeFavoriteStyle(memberProfileDto.getFavoriteStyle());
+        memberProfile.changePlayerName(memberProfileDto.getPlayerName());
 
         return memberProfileDto;
     }
