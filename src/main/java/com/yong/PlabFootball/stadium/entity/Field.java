@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.stadium.entity;
 
-import com.yong.PlabFootball.common.vo.BaseEntity;
+import com.yong.PlabFootball.global.vo.BaseEntity;
 import com.yong.PlabFootball.stadium.entity.vo.GrassCondition;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -13,6 +13,7 @@ import java.util.Objects;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "field")
 public class Field extends BaseEntity {
 
     @Id

@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.member.entity;
 
-import com.yong.PlabFootball.common.vo.BaseEntity;
+import com.yong.PlabFootball.global.vo.BaseEntity;
 import com.yong.PlabFootball.member.entity.vo.Ability;
 import com.yong.PlabFootball.member.entity.vo.FavoriteStyle;
 import com.yong.PlabFootball.member.entity.vo.Gender;
@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "member_profile")
 public class MemberProfile extends BaseEntity {
 
     @Id

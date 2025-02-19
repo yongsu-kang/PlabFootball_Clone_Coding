@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.member.entity;
 
-import com.yong.PlabFootball.common.vo.BaseEntity;
+import com.yong.PlabFootball.global.vo.BaseEntity;
 import com.yong.PlabFootball.member.entity.vo.Email;
 import com.yong.PlabFootball.member.entity.vo.Password;
 import com.yong.PlabFootball.reservation.entity.Reservation;
@@ -16,6 +16,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "member")
 public class Member extends BaseEntity {
 
     @Id
