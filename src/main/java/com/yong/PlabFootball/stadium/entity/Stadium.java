@@ -43,7 +43,7 @@ public class Stadium extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Region region;
 
-    @OneToMany(mappedBy = "stadium", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "stadium", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Field> fields = new ArrayList<>();
 
     @Builder
