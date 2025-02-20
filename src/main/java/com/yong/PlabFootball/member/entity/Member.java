@@ -55,14 +55,6 @@ public class Member extends BaseEntity {
         this.password = password.changePassword(newPassword);
     }
 
-    public String getEmail() {
-        return email.getEmail();
-    }
-
-    public String getPassword() {
-        return password.getPassword();
-    }
-
     public void addReservation(Reservation reservation) {
         reservation.setMember(this);
     }
