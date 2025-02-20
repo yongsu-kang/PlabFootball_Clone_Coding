@@ -13,8 +13,8 @@ public class MemberConverter {
         return MemberDto.builder()
                 .id(member.getId())
                 .name(member.getName())
-                .email(member.getEmail())
-                .password(member.getPassword())
+                .email(member.getEmail().getEmail())
+                .password(member.getPassword().getPassword())
                 .build();
     }
 

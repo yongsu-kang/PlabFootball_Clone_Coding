@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MemberProfileService {
+
     private final MemberProfileRepository memberProfileRepository;
 
     @Transactional
@@ -23,8 +24,6 @@ public class MemberProfileService {
         return MemberConverter.toMemberProfileDto(memberProfileRepository.findById(memberProfileDto.getId())
                 .orElseThrow(IllegalArgumentException::new));
     }
-
-    
 
     @Transactional
     public MemberProfileDto modifyMemberProfile(MemberProfileDto memberProfileDto) {

@@ -2,8 +2,7 @@ package com.yong.PlabFootball.member.controller;
 
 import com.yong.PlabFootball.member.dto.MemberDto;
 import com.yong.PlabFootball.member.dto.MemberProfileDto;
-import com.yong.PlabFootball.member.service.MemberProfileService;
-import com.yong.PlabFootball.member.service.MemberService;
+import com.yong.PlabFootball.member.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,50 +10,53 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/api/members")
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberService memberService;
     private final MemberProfileService memberProfileService;
+    private final SignUpMemberService signUpMemberService;
+    private final SearchMemberService searchMemberService;
+    private final ModifyMemberService modifyMemberService;
 
-    @PostMapping("/api/members")
-    public MemberDto createMember(MemberDto memberDto) {
-        return memberService.createMember(memberDto);
+    @PostMapping
+    public MemberDto signUpMember(MemberDto memberDto) {
+        return signUpMemberService.signUpMember(memberDto);
     }
 
-    @GetMapping("/api/members/{member_id}")
-    public MemberDto getMemberById(@PathVariable(value = "member_id") Long id) {
+    @GetMapping("/{member_id}")
+    public MemberDto searchMemberById(@PathVariable(value = "member_id") Long id) {
         MemberDto memberDto = MemberDto.builder().id(id).build();
-        return memberService.searchMemberById(memberDto);
+        return searchMemberService.searchMemberById(memberDto);
     }
 
-    @GetMapping("/api/members")
-    public List<MemberDto> getMembers() {
-        return memberService.searchAllMember();
+    @GetMapping
+    public List<MemberDto> searchAllMembers() {
+        return searchMemberService.searchAllMember();
     }
 
-    @PutMapping("/api/members")
+    @PutMapping
     public MemberDto changePassword(MemberDto memberDto) {
-        return memberService.modifyMemberPassword(memberDto);
+        return modifyMemberService.modifyMemberPassword(memberDto);
     }
 
-    @DeleteMapping("/api/members")
+    @DeleteMapping
     public ResponseEntity<Void> deleteMemberById(MemberDto memberDto) {
-        memberService.deleteById(memberDto);
+        modifyMemberService.deleteById(memberDto);
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/api/members/info")
+    @PostMapping("/info")
     public MemberProfileDto createMemberProfile(MemberProfileDto memberProfileDto) {
         return memberProfileService.createMemberProfile(memberProfileDto);
     }
 
-    @GetMapping("/api/members/info")
+    @GetMapping("/info")
     public MemberProfileDto getMemberProfileById(MemberProfileDto memberProfileDto) {
         return memberProfileService.searchProfileById(memberProfileDto);
     }
 
-    @PutMapping("/api/members/info")
+    @PutMapping("/info")
     public MemberProfileDto changeMemberProfile(MemberProfileDto memberProfileDto) {
         return memberProfileService.modifyMemberProfile(memberProfileDto);
     }
