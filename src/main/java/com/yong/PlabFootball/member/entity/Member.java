@@ -3,7 +3,7 @@ package com.yong.PlabFootball.member.entity;
 import com.yong.PlabFootball.global.vo.BaseEntity;
 import com.yong.PlabFootball.member.entity.vo.Email;
 import com.yong.PlabFootball.member.entity.vo.Password;
-import com.yong.PlabFootball.reservation.entity.Reservation;
+import com.yong.PlabFootball.rental.entity.Rental;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -36,7 +36,7 @@ public class Member extends BaseEntity {
     private MemberProfile memberProfile;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Reservation> reservations = new ArrayList<>();
+    private List<Rental> rentals = new ArrayList<>();
 
     @Builder
     public Member(Long id, String name, Email email, Password password) {
@@ -55,8 +55,8 @@ public class Member extends BaseEntity {
         this.password = password.changePassword(newPassword);
     }
 
-    public void addReservation(Reservation reservation) {
-        reservation.setMember(this);
+    public void addReservation(Rental rental) {
+        rental.setMember(this);
     }
 
     public void setMemberProfile(MemberProfile memberProfile) {
