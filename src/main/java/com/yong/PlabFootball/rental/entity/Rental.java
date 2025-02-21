@@ -1,10 +1,11 @@
-package com.yong.PlabFootball.reservation;
+package com.yong.PlabFootball.rental.entity;
 
-import com.yong.PlabFootball.common.vo.BaseEntity;
+import com.yong.PlabFootball.global.vo.BaseEntity;
 import com.yong.PlabFootball.member.entity.Member;
-import com.yong.PlabFootball.reservation.vo.ReservationCondition;
+import com.yong.PlabFootball.rental.entity.vo.ReservationCondition;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reservation extends BaseEntity {
+public class Rental extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,19 +27,25 @@ public class Reservation extends BaseEntity {
     private Member member;
 
     @OneToOne
-    private ReservationField reservationField;
+    private RentalField rentalField;
+
+    @Builder
+    public Rental(Long id, ReservationCondition reservationCondition) {
+        this.id = id;
+        this.reservationCondition = reservationCondition;
+    }
 
     public void setMember(Member member) {
         if (Objects.nonNull(this.member)) {
-            member.getReservations().remove(this);
+            member.getRentals().remove(this);
         }
         this.member = member;
-        member.getReservations().add(this);
+        member.getRentals().add(this);
     }
 
-    public void setReservationField(ReservationField reservationField) {
+    public void setRentalField(RentalField rentalField) {
         this.reservationCondition = ReservationCondition.PAUSE;
-        reservationField.setReservation(this);
+        rentalField.setRental(this);
     }
 
     public void chaneReservationCondition(ReservationCondition condition) {
