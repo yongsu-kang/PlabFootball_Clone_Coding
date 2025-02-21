@@ -1,8 +1,6 @@
 package com.yong.PlabFootball.stadium.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.yong.PlabFootball.stadium.entity.QField;
-import com.yong.PlabFootball.stadium.entity.QStadium;
 import com.yong.PlabFootball.stadium.entity.Stadium;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,12 +14,12 @@ import static com.yong.PlabFootball.stadium.entity.QStadium.*;
 @RequiredArgsConstructor
 public class StadiumQueryRepositoryImpl implements StadiumQueryRepository {
 
-    private final JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public List<Stadium> searchAllStadiumWithField() {
 
-        return jpaQueryFactory.select(stadium)
+        return queryFactory.select(stadium)
                 .from(stadium)
                 .leftJoin(stadium.fields,field)
                 .fetchJoin()

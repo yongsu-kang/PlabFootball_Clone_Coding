@@ -1,6 +1,7 @@
 package com.yong.PlabFootball.stadium.entity;
 
 import com.yong.PlabFootball.global.vo.BaseEntity;
+import com.yong.PlabFootball.rental.entity.RentalField;
 import com.yong.PlabFootball.stadium.entity.vo.GrassCondition;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,6 +9,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -41,6 +44,9 @@ public class Field extends BaseEntity {
 
     @ManyToOne
     private Stadium stadium;
+
+    @OneToMany(mappedBy = "field", fetch = FetchType.LAZY)
+    private List<RentalField> rentalFields = new ArrayList<>();
 
     @Builder
     public Field(Long id, String name, int width, int length, boolean outdoor, GrassCondition grassCondition, int amountPerHour) {
