@@ -1,6 +1,7 @@
 package com.yong.PlabFootball.rental.entity;
 
 import com.yong.PlabFootball.global.vo.BaseEntity;
+import com.yong.PlabFootball.rental.dto.RentalFieldDto;
 import com.yong.PlabFootball.rental.exception.EndTimeInvalidException;
 import com.yong.PlabFootball.rental.exception.PriceInvalidException;
 import com.yong.PlabFootball.rental.exception.StartTimeInvalidException;
@@ -12,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Entity
@@ -75,5 +77,23 @@ public class RentalField extends BaseEntity {
     public void setRental(Rental rental) {
         this.rental = rental;
         this.isPossible = false;
+    }
+
+    public void setField(Field field) {
+        if (Objects.nonNull(this.field)) {
+            field.getRentalFields().remove(this);
+        }
+        this.field = field;
+        field.getRentalFields().add(this);
+    }
+
+    public RentalFieldDto toDto() {
+        return RentalFieldDto.builder()
+                .id(this.id)
+                .startTime(this.startTime)
+                .endTime(this.endTime)
+                .isPossible(this.isPossible)
+                .price(this.price)
+                .build();
     }
 }

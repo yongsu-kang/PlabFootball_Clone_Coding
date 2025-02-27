@@ -66,4 +66,8 @@ public class Field extends BaseEntity {
         this.stadium = stadium;
         stadium.getFields().add(this);
     }
+
+    public void addRentalField(RentalField rentalField) {
+        rentalField.setField(this);
+    }
 }

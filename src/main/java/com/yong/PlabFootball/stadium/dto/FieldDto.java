@@ -1,10 +1,13 @@
 package com.yong.PlabFootball.stadium.dto;
 
+import com.yong.PlabFootball.rental.dto.RentalFieldDto;
 import com.yong.PlabFootball.stadium.entity.vo.GrassCondition;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,4 +22,5 @@ public class FieldDto {
     private GrassCondition grassCondition;
     private int amountPerHour;
     private StadiumDto stadiumDto;
+    private List<RentalFieldDto> rentalFields;
 }

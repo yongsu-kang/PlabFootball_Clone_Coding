@@ -1,5 +1,7 @@
 package com.yong.PlabFootball.global.converter;
 
+import com.yong.PlabFootball.rental.dto.RentalFieldDto;
+import com.yong.PlabFootball.rental.entity.RentalField;
 import com.yong.PlabFootball.stadium.dto.FieldDto;
 import com.yong.PlabFootball.stadium.dto.StadiumDto;
 import com.yong.PlabFootball.stadium.entity.Field;
@@ -47,9 +49,6 @@ public class StadiumConverter {
                 .amountPerHour(fieldDto.getAmountPerHour())
                 .build();
 
-        Stadium stadium = StadiumConverter.toStadiumEntity(fieldDto.getStadiumDto());
-        field.setStadium(stadium);
-
         return field;
     }
 
@@ -62,7 +61,12 @@ public class StadiumConverter {
                 .outdoor(field.isOutdoor())
                 .grassCondition(field.getGrassCondition())
                 .amountPerHour(field.getAmountPerHour())
+                .rentalFields(getRentalFieldDtoList(field))
                 .build();
+    }
+
+    private static List<RentalFieldDto> getRentalFieldDtoList(Field field) {
+        return field.getRentalFields().stream().map(RentalField::toDto).toList();
     }
 
     private static List<FieldDto> getFieldDtoList(Stadium stadium) {

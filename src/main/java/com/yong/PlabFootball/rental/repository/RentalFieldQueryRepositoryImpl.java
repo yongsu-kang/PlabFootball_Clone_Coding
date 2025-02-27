@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.yong.PlabFootball.rental.entity.QReservationField.*;
+import static com.yong.PlabFootball.rental.entity.QRentalField.*;
 import static com.yong.PlabFootball.stadium.entity.QField.*;
 import static com.yong.PlabFootball.stadium.entity.QStadium.*;
 
@@ -22,7 +22,7 @@ public class RentalFieldQueryRepositoryImpl implements RentalFieldQueryRepositor
         return queryFactory.selectFrom(stadium)
                 .leftJoin(stadium, field.stadium)
                 .fetchJoin()
-                .leftJoin(field.reservationFields, reservationField)
+                .leftJoin(field.rentalFields, rentalField)
                 .fetchJoin()
                 .fetch();
     }

@@ -14,6 +14,6 @@ import lombok.Setter;
 public class RentalDto {
     private Long id;
     private ReservationCondition reservationCondition;
+    private RentalFieldDto rentalFieldDto;
     private MemberDto memberDto;
-    private ReservationFieldDto reservationFieldDto;
 }

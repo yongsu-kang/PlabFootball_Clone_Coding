@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.rental.service;
 
-import com.yong.PlabFootball.global.converter.ReservationConverter;
+import com.yong.PlabFootball.global.converter.RentalConverter;
 import com.yong.PlabFootball.rental.dto.RentalDto;
 import com.yong.PlabFootball.rental.entity.Rental;
 import com.yong.PlabFootball.rental.repository.RentalRepository;
@@ -15,9 +15,9 @@ public class ReservationService {
     private final RentalRepository rentalRepository;
 
     public RentalDto createReservation(RentalDto rentalDto) {
-        Rental rental = ReservationConverter.toReservationEntity(rentalDto);
+        Rental rental = RentalConverter.toReservationEntity(rentalDto);
         Rental savedRental = rentalRepository.save(rental);
 
-        return ReservationConverter.toReservationDto(savedRental);
+        return RentalConverter.toReservationDto(savedRental);
     }
 }

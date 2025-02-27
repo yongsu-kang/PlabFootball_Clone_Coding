@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @AllArgsConstructor
-public class ReservationFieldDto {
+public class RentalFieldDto {
     private Long id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private boolean isPossible;
+    private int price;
     private FieldDto fieldDto;
-    private RentalDto rentalDto;
 }
