@@ -28,6 +28,16 @@ dependencies {
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// Jwt
+	implementation 'com.auth0:java-jwt:4.5.0'
+
+	// Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	compileOnly 'org.projectlombok:lombok'

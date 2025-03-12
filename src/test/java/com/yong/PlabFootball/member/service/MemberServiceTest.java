@@ -1,6 +1,9 @@
 package com.yong.PlabFootball.member.service;
 
 import com.yong.PlabFootball.member.dto.MemberDto;
+import com.yong.PlabFootball.member.exception.EmailDuplicateException;
+import com.yong.PlabFootball.member.exception.EmailNotFoundException;
+import com.yong.PlabFootball.member.exception.MemberNotFoundException;
 import com.yong.PlabFootball.member.repository.MemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,8 +60,20 @@ class MemberServiceTest {
     }
 
     @Test
+    @DisplayName("중복된 이메일로 회원가입할 수 없다.")
+    void duplicateEmailTest() {
+        MemberDto duplicateEmailDto = MemberDto.builder()
+                .name(name)
+                .email(email)
+                .password(password)
+                .build();
+
+        assertThrows(EmailDuplicateException.class, () -> memberService.createMember(duplicateEmailDto));
+    }
+
+    @Test
     @DisplayName("ID 값으로 회원을 찾을 수 있다.")
-    void findById() {
+    void searchMemberById() {
         MemberDto memberDto = MemberDto.builder()
                 .id(memberId)
                 .name(name)
@@ -66,7 +81,7 @@ class MemberServiceTest {
                 .password(password)
                 .build();
 
-        MemberDto foundMember = memberService.findById(memberDto);
+        MemberDto foundMember = memberService.searchMemberById(memberDto);
 
         assertAll(
                 () -> assertThat(foundMember.getName(), is(name)),
@@ -87,12 +102,12 @@ class MemberServiceTest {
                 .password(password)
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> memberService.findById(memberDto));
+        assertThrows(MemberNotFoundException.class, () -> memberService.searchMemberById(memberDto));
     }
 
     @Test
     @DisplayName("이메일로 찾을 수 있다.")
-    void findByEmail() {
+    void searchMemberByEmail() {
         MemberDto memberDto = MemberDto.builder()
                 .id(memberId)
                 .name(name)
@@ -100,7 +115,7 @@ class MemberServiceTest {
                 .password(password)
                 .build();
 
-        MemberDto foundMember = memberService.findByEmail(memberDto);
+        MemberDto foundMember = memberService.searchMemberByEmail(memberDto);
 
         assertAll(
                 () -> assertThat(foundMember.getId(), is(memberDto.getId())),
@@ -122,11 +137,11 @@ class MemberServiceTest {
                 .password(password)
                 .build();
 
-        assertThrows(IllegalArgumentException.class,() -> memberService.findByEmail(memberDto));
+        assertThrows(EmailNotFoundException.class, () -> memberService.searchMemberByEmail(memberDto));
     }
 
     @Test
-    void changePassword() {
+    void modifyMemberPassword() {
         String changePassword = "otherPassword123!!";
         MemberDto memberDto = MemberDto.builder()
                 .id(memberId)
@@ -135,7 +150,7 @@ class MemberServiceTest {
                 .password(changePassword)
                 .build();
 
-        MemberDto changedMember = memberService.changePassword(memberDto);
+        MemberDto changedMember = memberService.modifyMemberPassword(memberDto);
 
         assertAll(
                 () -> assertThat(changedMember.getPassword(), not(password)),

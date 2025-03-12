@@ -68,8 +68,8 @@ class MemberProfileServiceTest {
     }
 
     @Test
-    void findById() {
-        MemberProfileDto foundProfile = service.findById(dto);
+    void searchProfileById() {
+        MemberProfileDto foundProfile = service.searchProfileById(dto);
 
         assertAll(
                 () -> assertThat(foundProfile.getName(),is(name)),

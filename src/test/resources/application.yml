@@ -4,13 +4,13 @@ spring:
       on-profile: test
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/${DB_NAME}
+    url: jdbc:h2:tcp://localhost/~/plab_football
     username: sa
     password:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
