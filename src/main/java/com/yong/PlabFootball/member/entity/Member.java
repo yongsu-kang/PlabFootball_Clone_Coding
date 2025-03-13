@@ -1,6 +1,7 @@
 package com.yong.PlabFootball.member.entity;
 
 import com.yong.PlabFootball.global.vo.BaseEntity;
+import com.yong.PlabFootball.member.dto.MemberDto;
 import com.yong.PlabFootball.member.entity.vo.Email;
 import com.yong.PlabFootball.member.entity.vo.Password;
 import com.yong.PlabFootball.rental.entity.Rental;
@@ -9,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,16 @@ public class Member extends BaseEntity {
         rental.setMember(this);
     }
 
-    public void setMemberProfile(MemberProfile memberProfile) {
+    public void saveMemberProfile(MemberProfile memberProfile) {
         this.memberProfile = memberProfile;
+    }
+
+    public MemberDto toDto() {
+        return MemberDto.builder()
+                .id(this.id)
+                .name(this.name)
+                .email(this.email.getEmail())
+                .password(this.password.getPassword())
+                .build();
     }
 }

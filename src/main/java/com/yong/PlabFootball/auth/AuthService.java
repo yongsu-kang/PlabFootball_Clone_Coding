@@ -19,29 +19,18 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public MemberDto registerMember(RegisterMember registerMember) {
-        MemberDto registerDto = MemberDto.builder()
-                .name(registerMember.getName())
-                .email(registerMember.getEmail())
-                .password(passwordEncoder.encode(registerMember.getPassword()))
-                .build();
-
-        MemberDto signUpMember = signUpMemberService.signUpMember(registerDto);
-        System.out.println("save ok");
-
-        return signUpMember;
+    public MemberDto registerMember(SignUpMemberRequest signUpMemberRequest) {
+        return signUpMemberService.signUpMember(signUpMemberRequest.toMemberDto());
     }
 
-    public MemberDto login(LoginMember loginMember) {
-        MemberDto loginDto = MemberDto.builder()
-                .email(loginMember.getEmail())
-                .password(loginMember.getPassword())
-                .build();
+    public MemberDto login(LoginMemberRequest loginMemberRequest) {
+        MemberDto memberDto = searchMemberService.searchMemberByEmail(loginMemberRequest.toMemberDto());
+        matchLoginPassword(memberDto, loginMemberRequest);
+        return memberDto;
+    }
 
-        MemberDto memberDto = searchMemberService.searchMemberByEmail(loginDto);
-
-//        checkLoginPassword(memberDto, loginMember);
-
-        return null;
+    private void matchLoginPassword(MemberDto memberDto, LoginMemberRequest loginMemberRequest) {
+        if (!passwordEncoder.matches(loginMemberRequest.getPassword(), memberDto.getPassword()))
+            throw new RuntimeException();
     }
 }

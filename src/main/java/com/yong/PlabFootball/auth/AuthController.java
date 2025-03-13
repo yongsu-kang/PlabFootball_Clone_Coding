@@ -17,15 +17,15 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterMember registerMember) {
-        MemberDto member = authService.registerMember(registerMember);
-        return new ResponseEntity<>("regist success", HttpStatus.OK);
+    @PostMapping("/signup")
+    public ResponseEntity<String> register(@RequestBody SignUpMemberRequest signUpMemberRequest) {
+        MemberDto member = authService.registerMember(signUpMemberRequest);
+        return new ResponseEntity<>("signup success", HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginMember loginMember) {
-        MemberDto memberDto = authService.login(loginMember);
-        return null;
+    public ResponseEntity<String> login(@RequestBody LoginMemberRequest loginMemberRequest) {
+        MemberDto memberDto = authService.login(loginMemberRequest);
+        return ResponseEntity.ok("success");
     }
 }
