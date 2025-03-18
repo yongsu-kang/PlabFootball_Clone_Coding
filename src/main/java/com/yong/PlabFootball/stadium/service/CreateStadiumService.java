@@ -17,7 +17,6 @@ public class CreateStadiumService {
 
     public StadiumDto createStadium(StadiumDto stadiumDto) {
         Stadium stadium = StadiumConverter.toStadiumEntity(stadiumDto);
-
         return StadiumConverter.toStadiumDto(stadiumRepository.save(stadium));
     }
 }
