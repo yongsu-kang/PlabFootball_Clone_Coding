@@ -1,6 +1,6 @@
 package com.yong.PlabFootball.stadium.controller;
 
-import com.yong.PlabFootball.stadium.dto.CreateStadiumRequest;
+import com.yong.PlabFootball.stadium.dto.request.CreateStadiumRequest;
 import com.yong.PlabFootball.stadium.dto.StadiumDto;
 import com.yong.PlabFootball.stadium.service.*;
 import lombok.RequiredArgsConstructor;

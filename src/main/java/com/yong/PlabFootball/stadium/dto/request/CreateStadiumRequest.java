@@ -1,5 +1,6 @@
-package com.yong.PlabFootball.stadium.dto;
+package com.yong.PlabFootball.stadium.dto.request;
 
+import com.yong.PlabFootball.stadium.dto.StadiumDto;
 import com.yong.PlabFootball.stadium.entity.vo.Region;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
